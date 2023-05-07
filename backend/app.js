@@ -8,6 +8,7 @@ const { errors } = require('celebrate');
 const router = require('./routes');
 const appAuth = require('./routes/auth');
 const { auth } = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 const { handleErrors } = require('./middlewares/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./utils/constants/limiter');
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cookieParser());
 app.use(requestLogger); // подключаем логгер запросов
+app.use(cors);
 // функционал работы роутеров
 app.use(appAuth);
 // защита всех роутеров авторизацией
