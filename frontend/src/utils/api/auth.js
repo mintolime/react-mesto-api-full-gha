@@ -1,13 +1,11 @@
 import handleResponce from "./utils";
 
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://mintolime-mesto-pr.nomoredomains.monster';
 
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
 };
-
-
 
 export const register = ({ email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
