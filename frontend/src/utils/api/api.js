@@ -75,18 +75,18 @@ class Api {
   }
 }
 
-// export const apiData = new Api({
-//   url: 'https://mesto.nomoreparties.co/v1/cohort-58',
-//   headers: {
-//     'Content-Type': 'application/json; charset=UTF-8',
-//     authorization: '54338beb-6a3f-46f8-bd6b-cdb1bf1c9692',
-//   },
-// });
-
 export const apiData = new Api({
-  url: 'https://mintolime-mesto-pr.nomoredomains.monster',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-58',
   headers: {
     'Content-Type': 'application/json; charset=UTF-8',
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    authorization: '54338beb-6a3f-46f8-bd6b-cdb1bf1c9692',
   },
 });
+
+// export const apiData = new Api({
+//   url: 'https://mintolime-mesto-pr.nomoredomains.monster'
+//   // headers: {
+//   //   'Content-Type': 'application/json; charset=UTF-8',
+//   //   authorization: `Bearer ${localStorage.getItem('jwt')}`,
+//   // },
+// });
