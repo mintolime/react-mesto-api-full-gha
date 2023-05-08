@@ -27,14 +27,16 @@ class Api {
   getUserData() {
     return fetch(`${this.url}/users/me `, {
       headers: this.headers,
+      credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
   updateUserInfo(data) {
     return fetch(`${this.url}/users/me`, {
       method: 'PATCH',
-      headers: this.headers,
       body: JSON.stringify(data),
+      headers: this.headers,
+      credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -43,6 +45,7 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: this.headers,
+      credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -50,6 +53,7 @@ class Api {
     return fetch(`${this.url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
+      credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -58,6 +62,7 @@ class Api {
       return fetch(`${this.url}/cards/${id}/likes`, {
         method: 'PUT',
         headers: this.headers,
+        credentials: 'include',
       }).then((res) => handleResponce(res));
     } else {
       return fetch(`${this.url}/cards/${id}/likes`, {
@@ -84,7 +89,12 @@ export const apiData = new Api({
 });
 
 // export const apiData = new Api({
-//   url: 'https://mintolime-mesto-pr.nomoredomains.monster'
+//   url: 'https://mintolime-mesto-pr.nomoredomains.monster',
+//   // временно добавлен личный токен
+//   // headers: {
+//   //       'Content-Type': 'application/json; charset=UTF-8',
+//   //       authorization: '54338beb-6a3f-46f8-bd6b-cdb1bf1c9692',
+//   //     },
 //   // headers: {
 //   //   'Content-Type': 'application/json; charset=UTF-8',
 //   //   authorization: `Bearer ${localStorage.getItem('jwt')}`,
