@@ -40,25 +40,26 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
-
+console.log(isLoggedIn)
   const navigate = useNavigate();
   const isOpen =
     isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link;
 
   React.useEffect(() => {
-    setIsLoadingActive(true);
+    setIsLoadingActive(false);
+    isLoggedIn &&
     apiData
       .getAllData()
       .then(([initialCards, userData]) => {
         setCards(initialCards);
         setCurrentUser(userData);
-        setIsLoadingActive(false);
+        // setIsLoadingActive(false);
       })
       .catch((err) => {
         setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         console.log(err);
       });
-  }, []);
+  }, [isLoggedIn]);
 
   React.useEffect(() => {
     handleСheckToken();
@@ -231,11 +232,8 @@ function App() {
   };
 
   const handleСheckToken = () => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      // проверим токен
       auth
-        .checkToken(jwt)
+        .checkToken()
         .then((res) => {
           if (res) {
             //при перезагрузке без данного свойства email теряется
@@ -247,7 +245,6 @@ function App() {
         .catch((err) => {
           console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         });
-    }
   };
 
   const handleLogout = () => {
