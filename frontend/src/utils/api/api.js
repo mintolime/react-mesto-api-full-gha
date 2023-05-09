@@ -27,7 +27,7 @@ class Api {
   getUserData() {
     return fetch(`${this.url}/users/me `, {
       headers: this.headers,
-      credentials: 'include',
+      // credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -36,7 +36,7 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: this.headers,
-      credentials: 'include',
+      // credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -45,7 +45,7 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: this.headers,
-      credentials: 'include',
+      // credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -53,7 +53,7 @@ class Api {
     return fetch(`${this.url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
-      credentials: 'include',
+      // credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -91,10 +91,10 @@ class Api {
 export const apiData = new Api({
   url: 'https://mintolime-mesto-pr.nomoredomains.monster',
   // временно добавлен личный токен
-  // headers: {
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //       authorization: '54338beb-6a3f-46f8-bd6b-cdb1bf1c9692',
-  //     },
+  headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        authorization: '54338beb-6a3f-46f8-bd6b-cdb1bf1c9692',
+      },
   // headers: {
   //   'Content-Type': 'application/json; charset=UTF-8',
   //   authorization: `Bearer ${localStorage.getItem('jwt')}`,

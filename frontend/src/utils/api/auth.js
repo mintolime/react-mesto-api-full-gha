@@ -14,7 +14,7 @@ export const register = ({ email, password }) => {
     method: 'POST',
     headers,
     body: JSON.stringify({ email, password }),
-    credentials: 'include',
+    // credentials: 'include',
   }).then((res) => handleResponce(res));
 };
 
@@ -23,17 +23,17 @@ export const authorize = ({ email, password }) => {
     method: 'POST',
     headers,
     body: JSON.stringify({ email, password }),
-    credentials: 'include',
+    // credentials: 'include',
   }).then((res) => handleResponce(res));
 };
 
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
-    credentials: 'include',
-    // headers: {
-    //   ...headers,
-    //   Authorization: `Bearer ${token}`,
-    // },
+    // credentials: 'include',
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    },
   }).then((res) => handleResponce(res));
 };
