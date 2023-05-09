@@ -1,16 +1,13 @@
 const allowedCors = require('../utils/constants/allowedCors');
 
-const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
-  const { method } = req;
-  const { origin } = req.headers;
-  // Сохраняем источник запроса в переменную origin
-  // проверяем, что источник запроса есть среди разрешённых
+  const { method } = req; // Сохраняем тип запроса (HTTP-метод) в соответствующую переменную
+  const { origin } = req.headers;  // Сохраняем источник запроса в переменную origin
 
   const requestHeaders = req.headers['access-control-request-headers'];
-  res.header('Access-Control-Allow-Credentials', true);
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  // проверяем, что источник запроса есть среди разрешённых
   if (allowedCors.includes(origin)) {
     // устанавливаем заголовок, который разрешает браузеру запросы с этого источника
     res.header('Access-Control-Allow-Origin', origin);
@@ -22,5 +19,5 @@ module.exports = (req, res, next) => {
     res.header('Access-Control-Allow-Headers', requestHeaders);
     return res.end();
   }
-  next();
+ return next();
 };

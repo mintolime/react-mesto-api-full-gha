@@ -215,6 +215,7 @@ console.log(isLoggedIn)
     return auth
       .authorize(data)
       .then((data) => {
+        console.log(data)
         setIsLoggedIn(true);
         //при запросе авторизации проверяет токен, который возвращает email пользователя
         auth.checkToken(data.token).then((res) => {
@@ -232,8 +233,11 @@ console.log(isLoggedIn)
   };
 
   const handleСheckToken = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      // проверим токен
       auth
-        .checkToken()
+        .checkToken(jwt)
         .then((res) => {
           if (res) {
             //при перезагрузке без данного свойства email теряется
@@ -245,6 +249,7 @@ console.log(isLoggedIn)
         .catch((err) => {
           console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         });
+    }
   };
 
   const handleLogout = () => {

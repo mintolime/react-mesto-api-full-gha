@@ -6,7 +6,6 @@ const allowedCors = [
   'http://mintolime-mesto.nomoredomains.monster',
   'https://localhost:3000',
   'http://localhost:3000',
-  'localhost:3000',
 ];
 
 module.exports = allowedCors;

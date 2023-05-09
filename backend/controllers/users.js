@@ -14,15 +14,16 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
-    .then((user) => {
-      const token = jwt.sign(
-        { _id: user._id },
-        'SECRET_KEY',
-        { expiresIn: '7d' },
-      );
-      res.cookie('token', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true })
-        .send({ email });
-    })
+  .then((user) => { 
+    const token = jwt.sign( 
+      { _id: user._id }, 
+      'SECRET_KEY', 
+      { expiresIn: '7d' }, 
+    ); 
+    res.cookie('jwt', token, { 
+      httpOnly: true, 
+    }).send({ token }); 
+  })
     .catch(() => { next(new UnauthorizedError('Необходима авторизация')); });
 };
 
