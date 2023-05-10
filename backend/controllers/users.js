@@ -20,9 +20,11 @@ const login = (req, res, next) => {
         'SECRET_KEY',
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, {
-        httpOnly: true,
-      }).send({ token });
+      res
+        // .cookie('jwt', token, {
+        //   httpOnly: true,
+        // })
+        .send({ token });
     })
     .catch(() => { next(new UnauthorizedError('Необходима авторизация')); });
 };

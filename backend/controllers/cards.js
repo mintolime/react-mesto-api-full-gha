@@ -53,6 +53,7 @@ const updateLike = (req, res, method, next) => {
   const owner = req.user._id;
   const { cardId } = req.params;
   Card.findByIdAndUpdate(cardId, { [method]: { likes: owner } }, { new: true })
+    .populate(['owner', 'likes'])
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Карточка с указанным _id не найдена');
