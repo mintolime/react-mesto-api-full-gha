@@ -40,7 +40,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
-console.log(isLoggedIn)
+console.log(`Изменения из ветки developer > статус логина  ${isLoggedIn}`)
   const navigate = useNavigate();
   const isOpen =
     isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link;

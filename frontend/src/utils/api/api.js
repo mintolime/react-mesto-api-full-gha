@@ -96,7 +96,7 @@ export const apiData = new Api({
   //       authorization: '54338beb-6a3f-46f8-bd6b-cdb1bf1c9692',
   //     },
   headers: {
-    'Content-Type': 'application/json; charset=UTF-8',
+    'Content-Type': 'application/json',
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
   },
 });
