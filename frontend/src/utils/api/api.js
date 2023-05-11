@@ -27,7 +27,6 @@ class Api {
   getUserData() {
     return fetch(`${this.url}/users/me `, {
       headers: this.headers,
-      // credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -36,7 +35,6 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: this.headers,
-      // credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -45,7 +43,6 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: this.headers,
-      // credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -53,7 +50,6 @@ class Api {
     return fetch(`${this.url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
-      // credentials: 'include',
     }).then((res) => handleResponce(res));
   }
 
@@ -62,7 +58,6 @@ class Api {
       return fetch(`${this.url}/cards/${id}/likes`, {
         method: 'PUT',
         headers: this.headers,
-        credentials: 'include',
       }).then((res) => handleResponce(res));
     } else {
       return fetch(`${this.url}/cards/${id}/likes`, {

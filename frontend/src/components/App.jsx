@@ -218,9 +218,9 @@ console.log(`Изменения из ветки developer > статус лог�
         console.log(data)
         setIsLoggedIn(true);
         //при запросе авторизации проверяет токен, который возвращает email пользователя
-        auth.checkToken(data.token).then((res) => {
-          setEmail(res.data.email);
-        });
+        // auth.checkToken(data.token).then((res) => {
+        //   setEmail(res.data.email);
+        // });
         localStorage.setItem('jwt', data.token);
         navigate('/', { replace: true });
       })
