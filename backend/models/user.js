@@ -9,17 +9,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'Minion',
+    default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'ASAP? yes,sir!',
+    default: 'Исследователь',
   },
   avatar: {
     type: String,
-    default: 'https://media.tenor.com/-Y2YOay3_JoAAAAM/its-friday-dancing.gif',
+    default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
     validate: {
       validator: (value) => validator.isURL(value),
       message: 'Неправильный формат URL',
