@@ -241,7 +241,6 @@ function App() {
 
   const handleСheckToken = () => {
     const jwt = localStorage.getItem('jwt');
-    console.log(`я токен  ${jwt}`)
     if (jwt) {
       // проверим токен
       auth
@@ -265,7 +264,7 @@ function App() {
     navigate('/signin', { replace: true });
     setIsLoggedIn(false);
   };
-  
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {isLoadingActive ? (
