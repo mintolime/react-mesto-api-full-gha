@@ -17,7 +17,7 @@ import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 
-import { apiData } from '../utils/api/api';
+import Api from '../utils/api/api';
 import * as auth from '../utils/api/auth';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../context/CurrentUserContext';
@@ -40,10 +40,17 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
-console.log(`Изменения из ветки developer > статус логина  ${isLoggedIn}`)
   const navigate = useNavigate();
   const isOpen =
     isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link;
+
+const apiData = new Api({
+  url: 'https://mintolime-mesto-pr.nomoredomains.monster',
+  headers: {
+    'Content-Type': 'application/json',
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+  },
+});
 
   React.useEffect(() => {
     setIsLoadingActive(false);
