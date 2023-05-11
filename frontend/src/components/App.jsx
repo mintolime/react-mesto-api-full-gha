@@ -44,28 +44,29 @@ function App() {
   const isOpen =
     isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link;
 
-const apiData = new Api({
-  url: 'https://mintolime-mesto-pr.nomoredomains.monster',
-  headers: {
-    'Content-Type': 'application/json',
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
-  },
-});
+  const apiData = new Api({
+    url: 'https://mintolime-mesto-pr.nomoredomains.monster',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    },
+  });
 
   React.useEffect(() => {
-    setIsLoadingActive(false);
-    isLoggedIn &&
-    apiData
-      .getAllData()
-      .then(([initialCards, userData]) => {
-        setCards(initialCards);
-        setCurrentUser(userData);
-        // setIsLoadingActive(false);
-      })
-      .catch((err) => {
-        setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-        console.log(err);
-      });
+    if (isLoggedIn) {
+      setIsLoadingActive(true);
+      apiData
+        .getAllData()
+        .then(([initialCards, userData]) => {
+          setCards(initialCards);
+          setCurrentUser(userData);
+          setIsLoadingActive(false);
+        })
+        .catch((err) => {
+          setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+          console.log(err);
+        });
+    }
   }, [isLoggedIn]);
 
   React.useEffect(() => {
