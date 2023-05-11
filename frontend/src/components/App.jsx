@@ -218,9 +218,9 @@ console.log(`Изменения из ветки developer > статус лог�
         console.log(data)
         setIsLoggedIn(true);
         //при запросе авторизации проверяет токен, который возвращает email пользователя
-        // auth.checkToken(data.token).then((res) => {
-        //   setEmail(res.data.email);
-        // });
+        auth.checkToken(data.token).then((res) => {
+          setEmail(res.email);
+        });
         localStorage.setItem('jwt', data.token);
         navigate('/', { replace: true });
       })
@@ -234,6 +234,7 @@ console.log(`Изменения из ветки developer > статус лог�
 
   const handleСheckToken = () => {
     const jwt = localStorage.getItem('jwt');
+    console.log(`я токен  ${jwt}`)
     if (jwt) {
       // проверим токен
       auth
@@ -241,7 +242,7 @@ console.log(`Изменения из ветки developer > статус лог�
         .then((res) => {
           if (res) {
             //при перезагрузке без данного свойства email теряется
-            setEmail(res.data.email);
+            setEmail(res.email);
             setIsLoggedIn(true);
             navigate('/', { replace: true });
           }

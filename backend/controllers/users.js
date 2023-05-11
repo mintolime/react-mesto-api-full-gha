@@ -21,10 +21,7 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       res
-        // .cookie('jwt', token, {
-        //   httpOnly: true,
-        // })
-        .send({ token, email });
+        .send({ token, email }); // отправляем также почту для юзера
     })
     .catch(() => { next(new UnauthorizedError('Необходима авторизация')); });
 };
