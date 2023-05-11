@@ -24,7 +24,7 @@ const login = (req, res, next) => {
         // .cookie('jwt', token, {
         //   httpOnly: true,
         // })
-        .send({ token });
+        .send({ token, email });
     })
     .catch(() => { next(new UnauthorizedError('Необходима авторизация')); });
 };
