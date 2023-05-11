@@ -223,7 +223,6 @@ function App() {
     return auth
       .authorize(data)
       .then((data) => {
-        console.log(data)
         setIsLoggedIn(true);
         //при запросе авторизации проверяет токен, который возвращает email пользователя
         auth.checkToken(data.token).then((res) => {
@@ -266,6 +265,7 @@ function App() {
     navigate('/signin', { replace: true });
     setIsLoggedIn(false);
   };
+  
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {isLoadingActive ? (

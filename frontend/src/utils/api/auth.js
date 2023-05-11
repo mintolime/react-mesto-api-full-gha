@@ -2,8 +2,6 @@ import handleResponce from "./utils";
 
 export const BASE_URL = 'https://mintolime-mesto-pr.nomoredomains.monster';
 
-// export const BASE_URL = 'https://auth.nomoreparties.co';
-
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
