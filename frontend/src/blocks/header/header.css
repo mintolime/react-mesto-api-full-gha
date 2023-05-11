@@ -2,13 +2,15 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
-  padding-bottom: 31px;
-  padding-left: 27px;
+  padding: 0 27px 31px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 @media screen and (min-width: 720px) {
   .header {
-    padding-bottom: 41px;
-    padding-left: 15px;
+    padding: 0 15px 41px;
+    flex-direction: row;
   }
 }
