@@ -52,9 +52,9 @@ function App() {
     },
   });
 
-// загрузка всего контента
+  // загрузка всего контента
   React.useEffect(() => {
-  loadAllContent()
+    loadAllContent()
   }, [isLoggedIn]);
 
   React.useEffect(() => {
@@ -76,7 +76,7 @@ function App() {
     }
   }, [isOpen]);
 
-// функция загрузки контента
+  // функция загрузки контента
   const loadAllContent = () => {
     if (isLoggedIn) {
       setIsLoadingActive(true);
