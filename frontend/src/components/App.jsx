@@ -52,7 +52,7 @@ function App() {
     },
   });
 
-  // загрузка всего контента > потом заняться лоудером 
+  // загрузка всего контента > потом заняться лоудером
   React.useEffect(() => {
     setIsLoadingActive(false);
     isLoggedIn &&
@@ -68,7 +68,6 @@ function App() {
         });
   }, [isLoggedIn]);
 
-console.log(isLoadingActive)
   React.useEffect(() => {
     handleСheckToken();
   }, []);
