@@ -52,11 +52,23 @@ function App() {
     },
   });
 
-  // загрузка всего контента
+  // загрузка всего контента > потом заняться лоудером 
   React.useEffect(() => {
-    loadAllContent()
+    setIsLoadingActive(false);
+    isLoggedIn &&
+      apiData
+        .getAllData()
+        .then(([initialCards, userData]) => {
+          setCards(initialCards);
+          setCurrentUser(userData);
+        })
+        .catch((err) => {
+          setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+          console.log(err);
+        });
   }, [isLoggedIn]);
 
+console.log(isLoadingActive)
   React.useEffect(() => {
     handleСheckToken();
   }, []);
@@ -75,24 +87,6 @@ function App() {
       };
     }
   }, [isOpen]);
-
-  // функция загрузки контента
-  const loadAllContent = () => {
-    if (isLoggedIn) {
-      setIsLoadingActive(true);
-      apiData
-        .getAllData()
-        .then(([initialCards, userData]) => {
-          setCards(initialCards);
-          setCurrentUser(userData);
-          setIsLoadingActive(false);
-        })
-        .catch((err) => {
-          setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-          console.log(err);
-        });
-    }
-  }
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
