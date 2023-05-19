@@ -25,7 +25,6 @@ import { CurrentUserContext } from '../context/CurrentUserContext';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistration, setIsRegistration] = React.useState(false);
-  const [isLoadingActive, setIsLoadingActive] = React.useState(true);
   const [isLoadingText, setIsLoadingText] = React.useState(false);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -52,9 +51,8 @@ function App() {
     },
   });
 
-  // загрузка всего контента > потом заняться лоудером
+  // загрузка всего контента
   React.useEffect(() => {
-    setIsLoadingActive(false);
     isLoggedIn &&
       apiData
         .getAllData()
@@ -65,7 +63,7 @@ function App() {
         .catch((err) => {
           setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
           console.log(err);
-        });
+        })
   }, [isLoggedIn]);
 
   React.useEffect(() => {
@@ -130,7 +128,6 @@ function App() {
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
-        setIsLoadingActive(false);
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
@@ -235,7 +232,7 @@ function App() {
         setIsLoggedIn(false);
         setIsRegistration(false);
         handleRegistrationSuccess();
-      });
+      })
   };
 
   const handleСheckToken = () => {
@@ -254,7 +251,7 @@ function App() {
         })
         .catch((err) => {
           console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-        });
+        })
     }
   };
 
@@ -266,43 +263,39 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      {isLoadingActive ? (
-        <Loading error={isErrorMessage} />
-      ) : (
-        <>
-          <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={email} />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute
-                  component={Main}
-                  loggedIn={isLoggedIn}
-                  cards={cards}
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onEditAvatar={handleEditAvatarClick}
-                  onCardClick={handleCardClick}
-                  onCardDeleteClick={handleDeletePlaceClick}
-                  onCardLikeClick={handleCardLike}
-                />
-              }
-            />
-            <Route
-              path="/signup"
-              element={<Register onRegister={handleRegistration} />}
-              loggedIn={isLoggedIn}
-            />
-            <Route
-              path="/signin"
-              element={<Login onAuthorization={handleAuthorization} />}
-              loggedIn={isLoggedIn}
-            />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          {isLoggedIn && <Footer />}
-        </>
-      )}
+      <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={email} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            !isLoggedIn && localStorage.getItem('jwt') ?
+              (<Loading error={isErrorMessage} />) :
+              (<ProtectedRoute
+                component={Main}
+                loggedIn={isLoggedIn}
+                cards={cards}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                onCardDeleteClick={handleDeletePlaceClick}
+                onCardLikeClick={handleCardLike}
+              />)
+          }
+        />
+        <Route
+          path="/signup"
+          element={<Register onRegister={handleRegistration} />}
+          loggedIn={isLoggedIn}
+        />
+        <Route
+          path="/signin"
+          element={<Login onAuthorization={handleAuthorization} />}
+          loggedIn={isLoggedIn}
+        />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+      {isLoggedIn && <Footer />}
       <EditProfilePopup
         isLoading={isLoadingText}
         isOpen={isEditProfilePopupOpen}

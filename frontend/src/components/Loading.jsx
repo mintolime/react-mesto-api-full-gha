@@ -1,4 +1,3 @@
-//посмотреть стили , чтобы футер не прыгал наверх
 function Loading({ error }) {
   return (
     <div className="loading">
